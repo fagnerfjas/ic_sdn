@@ -1,14 +1,17 @@
-from setuptools import setup
+from setuptools import setup, find_packages
 
 setup(
-	name='yourscript',
+	name='Fagner',
     version='0.1',
-    py_moduloes=['yourscript'],
+    packages=find_packages(),
+    include_package_data=True,
+    #py_moduloes=['yourscript'],
     install_requires=[
         'click',
     ],
     entry_points='''
         [console_scripts]
-        yourscript=yourscript:cli
+        yourscript=pacote.scripts.script:cli
+        outro=pacote.utils:cli
     ''',
 )
