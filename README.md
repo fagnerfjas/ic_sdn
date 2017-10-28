@@ -1,9 +1,14 @@
 # ic_sdn
 ========
 Interface de Controle para Redes Definidas por Software
-Version: 0.1 2017 
+Version: 0.2 2017
 
 ## Instalação
+
+O comando (ic migrate) faz a instalação do diretório ~/.ic_sdn,
+e coloca o arquivo i_sdn.db.
+Este é o arquivo de banco de dados do SqLite
+'''$ ic migrate'''
 
 
 ## Instalação de ambiente de desenvolvimento

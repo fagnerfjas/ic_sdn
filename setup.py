@@ -5,13 +5,12 @@ setup(
     version='0.1',
     packages=find_packages(),
     include_package_data=True,
-    #py_moduloes=['yourscript'],
     install_requires=[
         'click',
     ],
     entry_points='''
         [console_scripts]
-        yourscript=pacote.scripts.script:cli
-        outro=pacote.utils:cli
+        ic=ic_sdn.ic:cli
+        sdn=ic_sdn.sdn:cli
     ''',
 )
