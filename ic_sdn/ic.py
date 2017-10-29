@@ -9,16 +9,15 @@ from ic_sdn.models.Controller import Controller
 def cli():
     """Informacoes e configuracao da aplicacao
     IC SDN (Interface de Comando SDN)"""
-    model = Model()
-    click.echo('sdfgdfgvdbhdbhhhgbfh dgbhdvhdgf')
+    pass
+
 
 
 @cli.command()
 def migrate():
     '''Cria o diretório ~/.ic_sdn, e o arquivo de banco de dados com as tabelas'''
     model = Model()
-    model.migrate()
-    click.echo( migrate )
+    click.echo( model.migrate() )
 
 
 @cli.command()

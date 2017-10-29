@@ -14,12 +14,12 @@ class Model(object):
     '''Retorna um JSON com todos os registros da tabela'''
     def all(self):
         data = self.db.getAll(self.tableName)
-        return data
+        if data:
+            return data
+        return 'Error! Inaccessible data.'
 
     def migrate(self):
         return self.db.migrate()
 
     def isConfigured(self):
-        if not self.db.isConfigured():
-            return False
-        return True
+        return self.db.isConfigured()

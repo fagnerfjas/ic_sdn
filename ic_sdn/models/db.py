@@ -19,6 +19,8 @@ class Db:
 
     '''Cria o diretório de base de dados, e cria as tabelas do banco de dados'''
     def migrate(self):
+        if self.isConfigured():
+            return 'Ok! Database is already configured!'
         self.createDirectory()
 
         data = self.conect()
@@ -41,7 +43,7 @@ class Db:
                     VALUES ('floodlight', 'Controlador de teste', '192.168.1.1', 6635, 'admin', 'admin' )""")
 
         self.saveDisconect()
-        return 'Database ok!'
+        return 'Ok! Database configured!'
 
 
 
@@ -50,8 +52,11 @@ class Db:
         Cria o arquivo caso ele não exista
     '''
     def conect(self):
-        self.conexao = sqlite3.connect(self.pathDb + 'ic_sdn.db')
-        return self.conexao.cursor()
+        try:
+            self.conexao = sqlite3.connect(self.pathDb + 'ic_sdn.db')
+            return self.conexao.cursor()
+        except sqlite3.OperationalError:
+            print False
 
     '''
         Disconecta do banco de dados
@@ -86,9 +91,12 @@ class Db:
     '''
     def getAll(self, table):
         data = self.conect()
-        dados = data.execute('SELECT * FROM ' + table).fetchall()
-        self.disconect()
-        return dados
+        if data:
+            query = data.execute('SELECT * FROM ' + table).fetchall()
+            self.disconect()
+        else:
+            return data
+        return query
 
     '''
         Seta as configuração do controlador
