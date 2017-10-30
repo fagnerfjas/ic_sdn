@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# Auth: Fagner Jefferson
+# V = 0.2 2017
+
 import click
 
 @click.command()

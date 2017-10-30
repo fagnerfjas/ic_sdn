@@ -1,6 +1,9 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+# Auth: Fagner Jefferson
+# V = 0.2 2017
+
 import click
 from ic_sdn.models.Model import Model
 from ic_sdn.models.Controller import Controller
@@ -21,7 +24,19 @@ def migrate():
 
 
 @cli.command()
-def ctl():
+@click.option('--add', '-a', is_flag=True)
+def ctl(add):
     '''Controllers configuration'''
+
+    if add:
+        ctl = click.prompt('Is the controller floodlight, odl or ryu')
+        name = click.prompt('Name')
+        ip = click.prompt('IP')
+        port = click.prompt('Port')
+        user = click.prompt('User')
+        user = click.prompt('Password', hide_input=True)
+
     controler = Controller()
-    click.echo(controler.all())
+    c = controler.create({'name': 'Nome Controlador', 'ip': 4127, 'jack': 4098})
+
+    click.echo(c)
