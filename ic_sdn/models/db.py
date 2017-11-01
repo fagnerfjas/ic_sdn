@@ -155,3 +155,8 @@ class Db:
         query = '''INSERT INTO {table} {col} VALUES {val};'''\
             .format(col=colVal['columns'], val=colVal['values'], table=tableName)
         return query
+
+    def execQuery(self, query):
+        data = self.conect()
+        data.execute(query)
+        self.saveDisconect()

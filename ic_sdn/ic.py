@@ -25,18 +25,29 @@ def migrate():
 
 @cli.command()
 @click.option('--add', '-a', is_flag=True)
-def ctl(add):
+@click.option('--list', '-l', is_flag=True)
+def ctl(add, list):
     '''Controllers configuration'''
 
+    contr = Controller()
+
     if add:
-        ctl = click.prompt('Is the controller floodlight, odl or ryu')
+        contro = click.prompt('Is the controller floodlight, odl or ryu')
         name = click.prompt('Name')
         ip = click.prompt('IP')
         port = click.prompt('Port')
         user = click.prompt('User')
-        user = click.prompt('Password', hide_input=True)
+        password = click.prompt('Password', hide_input=True)
 
-    controler = Controller()
-    c = controler.create({'name': 'Nome Controlador', 'ip': 4127, 'jack': 4098})
+        c = contr.create({
+            'controller': contro,
+            'name': name,
+            'ip': ip,
+            'jack': port,
+            'user': user,
+            'password': password
+        })
 
-    click.echo(c)
+    if list:
+        controllers = contr.all()
+        click.echo(controllers)

@@ -46,5 +46,6 @@ class Model(object):
 
     def create(self, data):
         data = self.validAttributes(data)
-        return self.db.queryInsert(self.tableName, data);
+        query = self.db.queryInsert(self.tableName, data);
+        self.db.execQuery(query)
 
