@@ -156,7 +156,30 @@ class Db:
             .format(col=colVal['columns'], val=colVal['values'], table=tableName)
         return query
 
+
+    def querySelect(self, tableName, field=False, value=False, oper=False, limit=False):
+        query = '''SELECT * FROM {table}'''.format(table=tableName)
+
+        if field != False and value != False:
+            if oper != False:
+                query = query + ''' WHERE {field}{oper}'{value}';'''.format(
+                field=field,
+                oper=oper,
+                value=value
+                )
+            else:
+                query = query + ''' WHERE {field} = '{value}';'''.format(
+                    field=field,
+                    value=value
+                )
+        if limit != False:
+            query = query + ''' LIMIT {int_limit}'''.format(int_limit=limit)
+
+        return query
+
+
     def execQuery(self, query):
         data = self.conect()
-        data.execute(query)
+        data = data.execute(query).fetchall()
         self.saveDisconect()
+        return data
